@@ -1,12 +1,24 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { FormScreen } from './src/pages/formScreen';
+import { ApplicationProvider } from '@ui-kitten/components/theme';
+import * as eva from '@eva-design/eva';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <ApplicationProvider {...eva} theme={eva.light} >
+      <ScrollView>
+        <View style={{
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: 800,
+        width: 400
+        }}>
+          <FormScreen/>
+        </View>
+      </ScrollView>
+    </ApplicationProvider>
   );
 }
 
