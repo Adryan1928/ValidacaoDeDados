@@ -7,7 +7,15 @@ export function Routes () {
     const {Navigator, Screen} = createNativeStackNavigator()
 
     return (
-        <Navigator>
+        <Navigator
+          initialRouteName='Home'
+          screenOptions={{
+            contentStyle : {
+                backgroundColor: 'white'
+            },
+            headerShown: false,
+          }}
+        >
             <Screen name='Home' component={Home} />
             <Screen name='Form' component={FormScreen} />
         </Navigator>

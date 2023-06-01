@@ -9,14 +9,6 @@ import { Route } from './src/Routes';
 export default function App() {
   return (
     <ApplicationProvider {...eva} theme={eva.light} > 
-        {/* <View style={{
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: 800,
-        width: 400
-        }}>
-          <FormScreen/>
-        </View> */}
         <Route/>
     </ApplicationProvider>
   );

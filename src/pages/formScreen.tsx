@@ -14,12 +14,6 @@ export function FormScreen() {
         email: yup.string().min(10, 'falta caractéries').required('digite alguma coisa'),
         senha: yup.string().required('digite alguma coisa').min(4, 'falta caractéries')
     })
-    const name = {
-        name: 'email'
-    }
-
-    const [teste, setTeste] = useState('rkvorm');
-
     const senha = useRef(null)
     const email = useRef(null)
 
@@ -54,7 +48,6 @@ export function FormScreen() {
                             />
                             {errors.senha && <Text style={{color: '#a71b1b'}} >{errors.senha}</Text>}
                             <Button title='Enviar' onPress={() => handleSubmit()} />
-                            <Text>{teste}</Text>
                         </View>
                 )}
             </Formik>
