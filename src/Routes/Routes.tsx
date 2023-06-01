@@ -11,7 +11,10 @@ export function Routes () {
           initialRouteName='Home'
           screenOptions={{
             contentStyle : {
-                backgroundColor: 'white'
+                backgroundColor: 'white',
+                paddingTop: 32,
+                paddingHorizontal: 16,
+                paddingBottom: 16
             },
             headerShown: false,
           }}
