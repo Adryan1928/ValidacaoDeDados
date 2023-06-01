@@ -3,16 +3,19 @@ import { StyleSheet, View, Text, TextInput, Button } from 'react-native';
 import * as yup from 'yup';
 import { Field, Form, Formik, useField } from 'formik';
 import { Input } from '@ui-kitten/components';
+import { InputField } from '../components/input';
 
 const initialValues = {
     email: '',
-    senha: ''
+    senha: '',
+    nome: ''
 }
 
 export function FormScreen() {
     const schema = yup.object().shape({
         email: yup.string().min(10, 'falta caractéries').required('digite alguma coisa'),
-        senha: yup.string().required('digite alguma coisa').min(4, 'falta caractéries')
+        senha: yup.string().required('digite alguma coisa').min(4, 'falta caractéries'),
+        nome: yup.string().required('Digite algo')
     })
     const senha = useRef(null)
     const email = useRef(null)
@@ -47,6 +50,9 @@ export function FormScreen() {
                                 value={values.senha}
                             />
                             {errors.senha && <Text style={{color: '#a71b1b'}} >{errors.senha}</Text>}
+
+                            <InputField name='nome' label='Digite seu nome'  />
+
                             <Button title='Enviar' onPress={() => handleSubmit()} />
                         </View>
                 )}
