@@ -1,13 +1,20 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import { createNavigator } from 'react-navigation';
 import {useNavigation} from '@react-navigation/native';
 import {Form, Field, Formik} from 'formik';
 import * as yup from 'yup';
-import { InputField } from '../components/input';
+import { InputField } from '../components/input'
+import { AuthContext } from '../contexts/auth';
+
+interface valuesProps {
+    user: string,
+    password: string
+}
 
 export function Home () {
     const navigation = useNavigation()
+    const { signed, signIn } = useContext(AuthContext)
 
     const initialValues = {
         user: '',
@@ -19,6 +26,11 @@ export function Home () {
         password: yup.string().required("Digite sua senha").min(8, 'Digite 8 caractéries')
     })
 
+    async function handleSubmit (values : valuesProps ) {
+        // const response = await signIn()
+        signIn()
+    }
+
     return (
         <View style={styles.container} >
             <Text style={styles.title} >Yachego</Text>
@@ -26,7 +38,7 @@ export function Home () {
             <Text>Bem vindo de volta</Text>
 
             <Formik
-                onSubmit={(values) => console.log(values)}
+                onSubmit={(values) => handleSubmit(values)}
                 initialValues={initialValues}
                 validationSchema={schema}
             >

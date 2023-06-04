@@ -1,14 +1,13 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Home } from '../pages/Home';
 import { FormScreen } from '../pages/formScreen';
 
-export function RoutesLoguin () {
+export function RoutesLogado () {
     const {Navigator, Screen} = createNativeStackNavigator()
 
     return (
         <Navigator
-          initialRouteName='Home'
+          initialRouteName='Form'
           screenOptions={{
             contentStyle : {
                 backgroundColor: 'white',
@@ -19,7 +18,6 @@ export function RoutesLoguin () {
             headerShown: false,
           }}
         >
-            <Screen name='Home' component={Home} />
             <Screen name='Form' component={FormScreen} />
         </Navigator>
     )

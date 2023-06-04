@@ -1,11 +1,15 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { Routes } from './Routes';
+import { RoutesLoguin } from './Routes';
+import { RoutesLogado } from './RoutesLogado';
+import { AuthContext } from '../contexts/auth';
 
-export function Route () {
+export function Routes () {
+    const { signed } = useContext(AuthContext)
+
     return (
         <NavigationContainer>
-            <Routes/>
+            {signed ? <RoutesLogado/> : <RoutesLoguin/>}
         </NavigationContainer>
     )
 }
