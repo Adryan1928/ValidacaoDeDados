@@ -13,7 +13,7 @@ interface valuesProps {
 
 export function Home () {
     const navigation = useNavigation()
-    const { signIn } = useContext(AuthContext)
+    const { signIn, error } = useContext(AuthContext)
 
     const initialValues = {
         user: '',
@@ -27,7 +27,7 @@ export function Home () {
 
     async function handleSubmit (values : valuesProps ) {
         // const response = await signIn()
-        signIn()
+        signIn(values)
     }
 
     return (
@@ -43,6 +43,7 @@ export function Home () {
             >
                 { ({values, handleSubmit}) => (
                     <View style={{gap: 24}} >
+                        {error && <Text>Email ou senha incorreta</Text>}
                         <InputField name='user' label='Digite seu email' />
                         <InputField name='password' label='Digite sua senha' />
                         <Button title='Ir para próxima página' onPress={() => {handleSubmit()}} />
