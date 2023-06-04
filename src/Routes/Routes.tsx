@@ -20,7 +20,6 @@ export function RoutesLoguin () {
           }}
         >
             <Screen name='Home' component={Home} />
-            <Screen name='Form' component={FormScreen} />
         </Navigator>
     )
 }

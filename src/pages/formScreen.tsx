@@ -1,9 +1,9 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useContext } from 'react';
 import { StyleSheet, View, Text, TextInput, Button } from 'react-native';
 import * as yup from 'yup';
-import { Field, Form, Formik, useField } from 'formik';
-import { Input } from '@ui-kitten/components';
+import { Formik } from 'formik';
 import { InputField } from '../components/input';
+import { AuthContext } from '../contexts/auth';
 
 const initialValues = {
     email: '',
@@ -20,13 +20,15 @@ export function FormScreen() {
     const senha = useRef(null)
     const email = useRef(null)
 
+    const { signOut } = useContext(AuthContext)
+
     // const [field, meta, helpers] = useField('email');
 
     return (
         <View  >
             <Text>Loguin</Text>
             <Formik
-                onSubmit={values => {console.log(values)}}
+                onSubmit={values => {console.log(values); signOut()}}
                 initialValues={initialValues}
                 validationSchema={schema}
             >

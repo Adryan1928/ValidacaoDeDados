@@ -1,8 +1,7 @@
-import React, {useContext} from 'react';
+import React, {useContext } from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
-import { createNavigator } from 'react-navigation';
 import {useNavigation} from '@react-navigation/native';
-import {Form, Field, Formik} from 'formik';
+import { Formik} from 'formik';
 import * as yup from 'yup';
 import { InputField } from '../components/input'
 import { AuthContext } from '../contexts/auth';
@@ -14,7 +13,7 @@ interface valuesProps {
 
 export function Home () {
     const navigation = useNavigation()
-    const { signed, signIn } = useContext(AuthContext)
+    const { signIn } = useContext(AuthContext)
 
     const initialValues = {
         user: '',

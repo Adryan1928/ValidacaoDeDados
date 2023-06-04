@@ -41,7 +41,7 @@ export const AuthProvider = (children : props ) => {
 
         setUser(response.user)
 
-        await AsyncStorage.setItem('@validacaoDeDados:user', JSON.stringify(user));
+        await AsyncStorage.setItem('@validacaoDeDados:user', JSON.stringify(response.user));
         await AsyncStorage.setItem('@validacaoDeDados:token', response.token);
     }
     
