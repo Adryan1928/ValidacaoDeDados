@@ -1,10 +1,10 @@
-import React, {useContext } from 'react';
+import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import { Formik} from 'formik';
 import * as yup from 'yup';
 import { InputField } from '../components/input'
-import { AuthContext } from '../contexts/auth';
+import { useAuth } from '../Hooks/useAuth';
 
 interface valuesProps {
     user: string,
@@ -13,7 +13,7 @@ interface valuesProps {
 
 export function Home () {
     const navigation = useNavigation()
-    const { signIn, error } = useContext(AuthContext)
+    const { signIn, error } = useAuth()
 
     const initialValues = {
         user: '',

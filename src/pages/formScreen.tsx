@@ -1,9 +1,9 @@
-import React, { useRef, useContext } from 'react';
+import React, { useRef } from 'react';
 import { StyleSheet, View, Text, TextInput, Button } from 'react-native';
 import * as yup from 'yup';
 import { Formik } from 'formik';
 import { InputField } from '../components/input';
-import { AuthContext } from '../contexts/auth';
+import { useAuth } from '../Hooks/useAuth';
 
 const initialValues = {
     email: '',
@@ -20,7 +20,7 @@ export function FormScreen() {
     const senha = useRef(null)
     const email = useRef(null)
 
-    const { signOut } = useContext(AuthContext)
+    const { signOut } = useAuth()
 
     // const [field, meta, helpers] = useField('email');
 
