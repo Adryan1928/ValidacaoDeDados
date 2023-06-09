@@ -6,13 +6,17 @@ import { ApplicationProvider } from '@ui-kitten/components/theme';
 import * as eva from '@eva-design/eva';
 import { Routes } from './src/Routes';
 import { AuthProvider } from './src/contexts/auth';
+import { QueryClientProvider } from 'react-query';
+import { queryClient } from './src/services/queryClient';
 
 export default function App() {
   return (
         <ApplicationProvider {...eva} theme={eva.light} >
-              <AuthProvider>
-                <Routes />
-              </AuthProvider>
+          <QueryClientProvider client={queryClient} >
+            <AuthProvider>
+              <Routes />
+            </AuthProvider>
+          </QueryClientProvider>
         </ApplicationProvider>
   );
 }

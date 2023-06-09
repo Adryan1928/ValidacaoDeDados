@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import { Formik} from 'formik';
@@ -26,7 +26,6 @@ export function Home () {
     })
 
     async function handleSubmit (values : valuesProps ) {
-        // const response = await signIn()
         signIn(values)
     }
 

@@ -1,7 +1,6 @@
 import React, {createContext, useState, useEffect} from "react";
-import * as auth from "../services/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { boolean } from "yup";
+import { getUsers } from "../Hooks/getUsers";
 
 interface User {
     user: string,
@@ -26,6 +25,8 @@ export const AuthProvider = (children : props ) => {
     const [user, setUser] = useState<User | null >(null)
     const [error, setError] = useState(false)
 
+    const {data} = getUsers()
+
     useEffect(() => {
         async function loadStorageData () {
             const storageUser = await AsyncStorage.getItem('@validacaoDeDados:user');
@@ -40,16 +41,18 @@ export const AuthProvider = (children : props ) => {
     }, [])
 
     async function signIn ({ password, user }: User) {
-        const response = await auth.signIn()
+        for (let usuario of data?.data){
+            if (password == usuario.password && user == usuario.user){
+                setUser(usuario)
 
-        if (password == response.user.password && user == response.user.user){
-            setUser(response.user)
-
-            await AsyncStorage.setItem('@validacaoDeDados:user', JSON.stringify(response.user));
-            await AsyncStorage.setItem('@validacaoDeDados:token', response.token);
-        } else {
-            setError(true)
+                await AsyncStorage.setItem('@validacaoDeDados:user', JSON.stringify(usuario));
+                // await AsyncStorage.setItem('@validacaoDeDados:token', response.token);
+            }
         }
+
+        setError(true)
+
+
     }
     function signOut () {
         AsyncStorage.clear().then(() =>{
