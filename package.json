@@ -28,7 +28,15 @@
     "react-native-svg": "^13.9.0",
     "react-navigation": "^4.4.4",
     "react-query": "^3.39.3",
-    "yup": "^1.2.0"
+    "yup": "^1.2.0",
+    "@date-io/date-fns":"^2.0.1", 
+    "@material-ui/core":"^4.9.0", 
+    "@material-ui/pickers":"^ 3.2.10", 
+    "date-fns":"^2.9.0", 
+    "lodash":"^4.17.15", 
+    "momento":"^2.24.0" , 
+    "prop-types":"^15.7.2", 
+    "sim":"^0.28.1" 
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

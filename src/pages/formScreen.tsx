@@ -1,63 +1,66 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { StyleSheet, View, Text, TextInput, Button } from 'react-native';
 import * as yup from 'yup';
 import { Formik } from 'formik';
 import { InputField } from '../components/input';
 import { useAuth } from '../Hooks/useAuth';
 import { Header } from '../components/header';
+import { useStaticState } from '@material-ui/pickers';
 
 const initialValues = {
-    email: '',
-    senha: '',
-    nome: ''
+            nome: '',
+            idade: 0
+        }
+
+function renderStep(step: number) {
+    switch (step) {
+        case 0:
+            return <InputField name='nome' label='Digite seu nome'  />
+        case 1:
+            return <InputField name='idade' label='Digite sua idade'  />
+        default:
+            return <Text>Not Found</Text>
+    } 
 }
 
 export function FormScreen() {
-    const schema = yup.object().shape({
-        email: yup.string().min(10, 'falta caractéries').required('digite alguma coisa'),
-        senha: yup.string().required('digite alguma coisa').min(4, 'falta caractéries'),
-        nome: yup.string().required('Digite algo')
-    })
-    const senha = useRef(null)
-    const email = useRef(null)
+    const schema = [
+        yup.object().shape({
+            nome: yup.string().required('Digite algo')
+        }),
+        yup.object().shape({
+            idade: yup.number().required('Digite algo')
+        })
+    ]
 
-    const { signOut } = useAuth()
+    const [currentStep, setCurrentStep]  = useState(0)
 
     // const [field, meta, helpers] = useField('email');
 
+    function handleStep () {
+        currentStep < 1 && setCurrentStep(1)
+    }
+
+    function handleback() {
+        setCurrentStep(currentStep-1)
+    }
     return (
         <View  >
             <Header page='Form'/>
             <Text>Loguin</Text>
             <Formik
-                onSubmit={values => {console.log(values); signOut()}}
+                onSubmit={values => {console.log(values); handleStep()}}
                 initialValues={initialValues}
-                validationSchema={schema}
+                validationSchema={schema[currentStep]}
             >
-                {({ values, handleChange, handleBlur, handleSubmit, errors }) => (
+                {({ handleSubmit }) => (
                         <View>
-                            <Text>Digite seu email</Text>
-                            <TextInput
-                                ref={email}
-                                style={styles.input}
-                                onChangeText={handleChange('email')}
-                                onBlur={handleBlur('email')}
-                                value={values.email}
-                            />
-                            {errors.email && <Text style={{color: '#a71b1b'}} >{errors.email}</Text>}
-                            <Text>Digite sua senha</Text>
-                            <TextInput
-                                style={styles.input}
-                                ref={senha}
-                                onChangeText={handleChange('senha')}
-                                onBlur={handleBlur('senha')}
-                                value={values.senha}
-                            />
-                            {errors.senha && <Text style={{color: '#a71b1b'}} >{errors.senha}</Text>}
+                            {renderStep(currentStep)}
 
-                            <InputField name='nome' label='Digite seu nome'  />
-
-                            <Button title='Enviar' onPress={() => handleSubmit()} />
+                            <View style={{flexDirection: 'row', justifyContent: 'flex-end', gap: 24}} >
+                                <Button title='voltar' disabled={currentStep===0} onPress={handleback} />
+                                <Button title={currentStep < 1 ? 'Próximo': 'Enviar'} onPress={() => handleSubmit()} />
+                            </View>
                         </View>
                 )}
             </Formik>
@@ -67,8 +70,8 @@ export function FormScreen() {
 
 const styles = StyleSheet.create({
     input : {
-        backgroundColor: '#d0cece',
-        borderColor: '#aba9a9',
+        backgroundColor: '#ab9393',
+        borderColor: '#bdbcbc',
         borderWidth: 2,
         width: 300,
         borderRadius: 5,
