@@ -4,6 +4,7 @@ import * as yup from 'yup';
 import { Formik } from 'formik';
 import { InputField } from '../components/input';
 import { useAuth } from '../Hooks/useAuth';
+import { Header } from '../components/header';
 
 const initialValues = {
     email: '',
@@ -26,6 +27,7 @@ export function FormScreen() {
 
     return (
         <View  >
+            <Header page='Form'/>
             <Text>Loguin</Text>
             <Formik
                 onSubmit={values => {console.log(values); signOut()}}

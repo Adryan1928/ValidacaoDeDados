@@ -7,9 +7,16 @@ interface User {
     password: string
 }
 
+interface Usuario {
+    id: number,
+    name: string,
+    user: string,
+    password: string
+}
+
 interface AuthContextProps {
     signed: boolean;
-    user: User | null ;
+    user: Usuario | null ;
     error: boolean;
     signIn(user?:User): Promise<void>;
     signOut(): void;
@@ -22,7 +29,7 @@ interface props {
 export const AuthContext = createContext<AuthContextProps>({} as AuthContextProps );
 
 export const AuthProvider = (children : props ) => {
-    const [user, setUser] = useState<User | null >(null)
+    const [user, setUser] = useState<Usuario | null >(null)
     const [error, setError] = useState(false)
 
     const {data} = getUsers()
@@ -32,7 +39,7 @@ export const AuthProvider = (children : props ) => {
             const storageUser = await AsyncStorage.getItem('@validacaoDeDados:user');
             const storageToken = await AsyncStorage.getItem('@validacaoDeDados:token');
 
-            if (storageUser && storageToken) {
+            if (storageUser) {
                 setUser(JSON.parse(storageUser))
             }
         }
