@@ -11,6 +11,7 @@ interface Props extends TextInputProps {
 export function InputField ({name, label, ...rest} : Props) {
 
     const [field, meta, helpers] = useField({name})
+    const error = meta.touched && meta.error
     return (
         <View>
             <Text>{label}</Text>
@@ -23,7 +24,7 @@ export function InputField ({name, label, ...rest} : Props) {
                 onBlur={() => helpers.setTouched(true)}
                 {...rest}
             />
-            {meta.error && <Text style={styles.error} >{meta.error}</Text>}
+            {error && <Text style={styles.error} >{meta.error}</Text>}
         </View>
     )
 }

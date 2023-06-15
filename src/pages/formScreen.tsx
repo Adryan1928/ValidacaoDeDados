@@ -1,16 +1,10 @@
 import React, { useRef, useState } from 'react';
-import { StyleSheet, View, Text, TextInput, Button } from 'react-native';
+import { StyleSheet, View, Text, Button } from 'react-native';
 import * as yup from 'yup';
 import { Formik } from 'formik';
 import { InputField } from '../components/input';
-import { useAuth } from '../Hooks/useAuth';
 import { Header } from '../components/header';
-import { useStaticState } from '@material-ui/pickers';
-
-const initialValues = {
-            nome: '',
-            idade: 0
-        }
+import { Steps } from '../components/steps';
 
 function renderStep(step: number) {
     switch (step) {
@@ -24,6 +18,8 @@ function renderStep(step: number) {
 }
 
 export function FormScreen() {
+    const [currentStep, setCurrentStep]  = useState(0)
+
     const schema = [
         yup.object().shape({
             nome: yup.string().required('Digite algo')
@@ -33,9 +29,10 @@ export function FormScreen() {
         })
     ]
 
-    const [currentStep, setCurrentStep]  = useState(0)
-
-    // const [field, meta, helpers] = useField('email');
+    const initialValues = {
+        nome: '',
+        idade: ''
+    }
 
     function handleStep () {
         currentStep < 1 && setCurrentStep(1)
@@ -45,8 +42,9 @@ export function FormScreen() {
         setCurrentStep(currentStep-1)
     }
     return (
-        <View  >
+        <View>
             <Header page='Form'/>
+            <Steps currentStep={currentStep} />
             <Text>Loguin</Text>
             <Formik
                 onSubmit={values => {console.log(values); handleStep()}}
