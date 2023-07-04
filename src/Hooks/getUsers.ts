@@ -3,11 +3,12 @@ import { instance } from "./instance"
 
 
 export function getUsers (){
+    let users
     const data = useQuery({
         queryKey: ['users'],
-        queryFn: () => {
-            const response = instance.get('/users')
-            return response
+        queryFn: async () => {
+            const response = await instance.get('/users')
+            return response.data
         },
         staleTime: 30 * 1000
     })

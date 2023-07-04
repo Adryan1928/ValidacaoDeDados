@@ -2,6 +2,7 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { FormScreen } from '../pages/formScreen';
 import { Menu } from '../pages/menu';
+import { ChangeNameScreen } from '../pages/changeName';
 
 export function RoutesLogado () {
     const {Navigator, Screen} = createNativeStackNavigator()
@@ -21,6 +22,7 @@ export function RoutesLogado () {
         >
             <Screen name='Form' component={FormScreen} />
             <Screen name='Menu' component={Menu}/>
+            <Screen name='ChangeName' component={ChangeNameScreen}/>
         </Navigator>
     )
 }

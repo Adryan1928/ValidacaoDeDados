@@ -18,6 +18,10 @@ export function Menu() {
         navigation.navigate(page as never)
     }
 
+    function handleChangeName() {
+        navigation.navigate('ChangeName' as never)
+    }
+
     return (
         <View style={{gap:16}} >
             <View>
@@ -29,6 +33,11 @@ export function Menu() {
                     <Text style={{fontSize:16}} >Voltar</Text>
                 </TouchableOpacity>
                 <View style={{height:2, backgroundColor: '#aaaaa'}}></View>
+            </View>
+            <View>
+                <TouchableOpacity onPress={handleChangeName} >
+                    <Text style={{fontSize:16}} >Trocar nome</Text>
+                </TouchableOpacity>
             </View>
             <View>
                 <TouchableOpacity onPress={signOut} >

@@ -7,7 +7,7 @@ interface User {
     password: string
 }
 
-interface Usuario {
+export interface Usuario {
     id: number,
     name: string,
     user: string,
@@ -32,7 +32,7 @@ export const AuthProvider = (children : props ) => {
     const [user, setUser] = useState<Usuario | null >(null)
     const [error, setError] = useState(false)
 
-    const {data} = getUsers()
+    const { data : users } = getUsers()
 
     useEffect(() => {
         async function loadStorageData () {
@@ -48,11 +48,12 @@ export const AuthProvider = (children : props ) => {
     }, [])
 
     async function signIn ({ password, user }: User) {
-        for (let usuario of data?.data){
-            if (password == usuario.password && user == usuario.user){
-                setUser(usuario)
+        for (let userApi of users){
+            console.log(userApi)
+            if (password == userApi.password && user == userApi.user){
+                setUser(userApi)
 
-                await AsyncStorage.setItem('@validacaoDeDados:user', JSON.stringify(usuario));
+                await AsyncStorage.setItem('@validacaoDeDados:user', JSON.stringify(userApi));
                 // await AsyncStorage.setItem('@validacaoDeDados:token', response.token);
             }
         }

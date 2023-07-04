@@ -7,7 +7,7 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "api": "json-server ./src/API/db.json --host 192.168.1.106 --port 5000"
+    "api": "json-server ./src/API/db.json --host 192.168.1.102 --port 5000"
   },
   "dependencies": {
     "@date-io/date-fns": "^2.0.1",

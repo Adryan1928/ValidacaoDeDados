@@ -47,7 +47,7 @@ export function FormScreen() {
             <Steps currentStep={currentStep} />
             <Text>Loguin</Text>
             <Formik
-                onSubmit={values => {console.log(values); handleStep()}}
+                onSubmit={() => {handleStep()}}
                 initialValues={initialValues}
                 validationSchema={schema[currentStep]}
             >
