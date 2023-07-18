@@ -1,5 +1,5 @@
 import { useQuery } from "react-query"
-import { instance } from "./instance"
+import { instance } from "../Hooks/instance"
 
 
 export function getUsers (){

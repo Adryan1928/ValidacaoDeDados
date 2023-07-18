@@ -8,6 +8,7 @@ import { Routes } from './src/Routes';
 import { AuthProvider } from './src/contexts/auth';
 import { QueryClientProvider } from 'react-query';
 import { queryClient } from './src/services/queryClient';
+// import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
             <AuthProvider>
               <Routes />
             </AuthProvider>
+            {/* <ReactQueryDevtools initialIsOpen={false} /> */}
           </QueryClientProvider>
         </ApplicationProvider>
   );

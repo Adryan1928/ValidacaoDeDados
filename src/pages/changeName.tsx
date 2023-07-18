@@ -1,20 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, Button } from "react-native";
 import { InputField } from "../components/input";
 import { Formik  } from "formik";
 import { useAuth } from "../Hooks/useAuth";
 import { useNavigation } from "@react-navigation/native";
-import { useQueryClient } from "react-query";
-import { queryClient } from "../services/queryClient";
-import { Usuario } from "../contexts/auth";
+import { setName } from "../services/setName";
 
 interface valueProps {
-    name: string | undefined
+    name: string
 }
 
 export function ChangeNameScreen () {
     const { user } = useAuth()
     const navigation = useNavigation()
+    const [namee, setNamee] = useState<string | undefined>('')
+    const { isLoading, mutate } = setName(namee)
 
     // Resgatando dados dos usuários com o cache do react Query
     // const usersQuery = queryClient.getQueriesData<Usuario[]>(['users'])
@@ -25,22 +25,26 @@ export function ChangeNameScreen () {
         name: user?.name
     }
 
-    function handleVoltar ( value : valueProps ) {
-        console.log(value)
-        navigation.navigate('Menu' as never, { page: 'Form' } as never)
+    function handleVoltar (values:{name: string | undefined}) {
+        setNamee(values?.name)
+        mutate()
+
+        navigation.navigate('Menu', { page: 'Form' })
     }
+
+
 
     return (
         <View>
             <Text>Trocar nome do Usuário</Text>
             <Formik
                 initialValues={values}
-                onSubmit={(value) => handleVoltar(value)}
+                onSubmit={(values) => handleVoltar(values)}
             >
                 {({handleSubmit}) => (
                     <View>
                         <InputField name="name" label="Digite seu novo nome" />
-                        <Button title="Trocar" onPress={() => handleSubmit()} />
+                        <Button title={ isLoading? 'Carregando' :"Trocar"} onPress={() => handleSubmit()} />
                     </View>
                 )}
             </Formik>

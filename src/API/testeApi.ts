@@ -1,1 +1,0 @@
-const api = fetch('http://localhost:5000').then(data => console.log(data.json))
