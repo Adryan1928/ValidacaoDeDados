@@ -5,6 +5,8 @@ import { Formik } from 'formik';
 import { InputField } from '../components/input';
 import { Header } from '../components/header';
 import { Steps } from '../components/steps';
+import axios from 'axios';
+import { get } from 'react-native/Libraries/TurboModule/TurboModuleRegistry';
 
 function renderStep(step: number) {
     switch (step) {
@@ -19,6 +21,17 @@ function renderStep(step: number) {
 
 export function FormScreen() {
     const [currentStep, setCurrentStep]  = useState(0)
+
+    // axios.get('http://127.0.0.1:8000/api/cidades/').catch((response) => {console.log(JSON.stringify(response))})
+    // fetch('http://127.0.0.1:8000/api/cidades/').catch((response) => {console.log(JSON.stringify(response), 'erro', response)}).then(response => {console.log(response)})
+    async function getUsers () {
+        const response = await axios.get("http://10.0.0.111:8000/api/cidades/").catch(response => {JSON.stringify(response)})
+        console.log(JSON.stringify(response))
+
+        10.0.2.2
+        10.0.0.111
+    }
+    
 
     const schema = [
         yup.object().shape({
@@ -56,7 +69,7 @@ export function FormScreen() {
                             {renderStep(currentStep)}
 
                             <View style={{flexDirection: 'row', justifyContent: 'flex-end', gap: 24}} >
-                                <Button title='voltar' disabled={currentStep===0} onPress={handleback} />
+                                <Button title='voltar' disabled={currentStep===0} onPress={getUsers} />
                                 <Button title={currentStep < 1 ? 'Próximo': 'Enviar'} onPress={() => handleSubmit()} />
                             </View>
                         </View>

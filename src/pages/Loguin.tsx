@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, Button, StyleSheet, TouchableOpacity } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import { Formik} from 'formik';
 import * as yup from 'yup';
@@ -29,6 +29,10 @@ export function Home () {
         signIn(values)
     }
 
+    function handleSingIn () {
+        navigation.navigate('SingIn')
+    }
+
     return (
         <View style={styles.container} >
             <Text style={styles.title} >Yachego</Text>
@@ -49,6 +53,10 @@ export function Home () {
                     </View>
                 )}
             </Formik>
+            <Text style={styles.footerText} >Quer criar uma conta? <TouchableOpacity onPress={() => handleSingIn()} >
+                    <Text style={styles.footerLink}>Cadastre-se</Text>
+                </TouchableOpacity>
+            </Text>
         </View>
     )
 }
@@ -60,5 +68,14 @@ const styles = StyleSheet.create({
         color: '#bc7f1e',
         fontSize: 32,
         textAlign: 'center'
+    },
+    footerText: {
+        fontSize: 16,
+        fontWeight: '400'
+    },
+    footerLink: {
+        fontSize: 16,
+        fontWeight: '600',
+        color: '#2628d0'
     }
 })

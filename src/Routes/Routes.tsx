@@ -2,6 +2,7 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Home } from '../pages/Loguin';
 import { FormScreen } from '../pages/formScreen';
+import { CadastroScreen } from '../pages/cadastroScreen';
 
 export function RoutesLoguin () {
     const {Navigator, Screen} = createNativeStackNavigator()
@@ -20,6 +21,7 @@ export function RoutesLoguin () {
           }}
         >
             <Screen name='Home' component={Home} />
+            <Screen name='singIn' component={CadastroScreen} />
         </Navigator>
     )
 }
